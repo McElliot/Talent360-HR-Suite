@@ -20,6 +20,17 @@
             </flux:navlist.group>
         </flux:navlist>
 
+        <flux:navlist.group heading="Psychometrics" tooltip="Manage individuals taking evaluations" icon="user-group"
+            :expanded="request()->routeIs('candidates.*')" class="nav-participants">
+
+            <!-- Participant Roster -->
+            <flux:navlist.item :href="route('admin.psychometrics.index')" icon="clipboard-document-list"
+                :current="request()->routeIs('admin.psychometrics.index')"
+                tooltip="View and manage all evaluation candidates" wire:navigate>
+                Participant Roster
+            </flux:navlist.item>
+        </flux:navlist.group>
+
         <flux:spacer />
 
         <flux:navlist variant="outline">
@@ -125,6 +136,9 @@
     </flux:header>
 
     {{ $slot }}
+
+    @livewireScripts
+    @stack('scripts')
 
     <x-toaster-hub />
 
