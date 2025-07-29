@@ -19,6 +19,7 @@ class TestTypeTable extends DataTableComponent
 {
     protected $model = PsychometricTestType::class;
     protected $listeners = ['test-type-updated' => '$refresh'];
+    // protected $relationships = ['createdBy', 'updatedBy'];
 
     public function configure(): void
     {
@@ -75,11 +76,11 @@ class TestTypeTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("ID", "id")
-                ->searchable()
-                ->sortable()
-                ->format(fn($value) => '<span class="font-mono">' . $value . '</span>')
-                ->html(),
+            Column::make('#')
+                ->label(function ($row, Column $column) {
+                    $rows = $this->getRows(); // Get the rows collection
+                    return ($rows->currentPage() - 1) * $rows->perPage() + $column->getRowIndex() + 1;
+                }),
 
             Column::make("Name", "name")
                 ->searchable()
@@ -93,6 +94,7 @@ class TestTypeTable extends DataTableComponent
 
             Column::make("Description", "description")
                 ->searchable()
+                ->sortable()  // Enable sorting
                 ->collapseOnMobile()
                 ->format(fn($value) => Str::limit($value, 50)),
 
