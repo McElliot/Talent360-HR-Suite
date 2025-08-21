@@ -20,15 +20,27 @@
             </flux:navlist.group>
         </flux:navlist>
 
-        <flux:navlist.group heading="Psychometrics" tooltip="Manage individuals taking evaluations" icon="user-group"
-            :expanded="request()->routeIs('candidates.*')" class="nav-participants">
+        <!-- Psychometrics Section -->
+        <flux:navlist.group heading="Psychometrics" icon="clipboard-document-check"
+            :expanded="request()->routeIs('admin.psychometrics.*')">
+
+            <!-- Test Types -->
+            <flux:navlist.item :href="route('admin.psychometrics.types.index')" icon="rectangle-stack"
+                :current="request()->routeIs('admin.psychometrics.types.*')" wire:navigate>
+                Test Categories
+            </flux:navlist.item>
+
+            <!-- Tests -->
+            <flux:navlist.item :href="route('admin.psychometrics.tests.index')" icon="document-text"
+                :current="request()->routeIs('admin.psychometrics.tests.*')" wire:navigate>
+                Assessment Tests
+            </flux:navlist.item>
 
             <!-- Participant Roster -->
-            <flux:navlist.item :href="route('admin.psychometrics.index')" icon="clipboard-document-list"
-                :current="request()->routeIs('admin.psychometrics.index')"
-                tooltip="View and manage all evaluation candidates" wire:navigate>
+            {{-- <flux:navlist.item :href="route('admin.psychometrics.candidates.index')" icon="user-group"
+                :current="request()->routeIs('admin.psychometrics.candidates.*')" wire:navigate>
                 Participant Roster
-            </flux:navlist.item>
+            </flux:navlist.item> --}}
         </flux:navlist.group>
 
         <flux:spacer />
@@ -137,10 +149,10 @@
 
     {{ $slot }}
 
+    <x-toaster-hub />
+
     @livewireScripts
     @stack('scripts')
-
-    <x-toaster-hub />
 
     @fluxScripts
 </body>

@@ -21,8 +21,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin/')->name('admin.')->group(function () {
         Route::prefix('psychometrics')->name('psychometrics.')->group(function () {
-            Route::get('/', Admin\Psychometrics\Testtype\Index::class)->name('index'); // List category
-            Route::get('/create', Admin\Psychometrics\Testtype\Create::class)->name('create'); // Create category
+            Route::get('/', Admin\Psychometrics\Testtype\Index::class)->name('types.index'); // List category
+            Route::get('/create', Admin\Psychometrics\Testtype\Create::class)->name('types.create'); // Create category
+
+            // Tests
+            Route::get('/tests', Admin\Psychometrics\Test\Index::class)->name('tests.index');
+            Route::get('/tests/create', Admin\Psychometrics\Test\Create::class)->name('tests.create');
+            Route::get('/tests/{test}/edit', Admin\Psychometrics\Test\Edit::class)->name('tests.edit');
+
+            // Test Competencies
+            Route::get('/tests/{test}/competencies', Admin\Psychometrics\Competency\Index::class)
+                ->name('tests.competencies.index');
         });
     });
 });

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PsychometricTestTypeSeeder::class,
             PsychometricTestSeeder::class,
+            PsychometricCompetenceSeeder::class,
             // Add other seeders here as needed
         ]);
     }

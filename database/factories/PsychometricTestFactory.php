@@ -22,6 +22,7 @@ class PsychometricTestFactory extends Factory
             'psychometric_test_type_id' => PsychometricTestType::inRandomOrder()->first()?->id,
             'title' => fake()->unique()->words(3, true) . ' Test',
             'instructions' => fake()->paragraph(),
+            'description' => fake()->paragraph(),
             'duration_minutes' => fake()->numberBetween(15, 120),
             'is_active' => fake()->boolean(85),
             'created_by' => User::inRandomOrder()->first()?->id,

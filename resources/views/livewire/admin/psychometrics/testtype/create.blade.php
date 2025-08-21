@@ -13,7 +13,7 @@
             </div>
             <div class="space-x-2">
                 <!-- Back button with clearer label -->
-                <flux:button variant="danger" size="sm" :href="route('admin.psychometrics.index')"
+                <flux:button variant="danger" size="sm" :href="route('admin.psychometrics.types.index')"
                     icon="arrow-uturn-left" class="shadow-sm hover:shadow-md transition-all hover:bg-red-600">
                     Back to Test Types
                 </flux:button>

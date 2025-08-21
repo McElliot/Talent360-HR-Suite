@@ -16,10 +16,10 @@
             </flux:navmenu.item>
 
             <flux:navmenu.separator />
-            <flux:navmenu.item :href="route('admin.psychometrics.index', $type->id)" icon="eye">
+            {{-- <flux:navmenu.item :href="route('admin.psychometrics.types.create', $type->id)" icon="eye">
                 View Questions
             </flux:navmenu.item>
-            <flux:navmenu.separator />
+            <flux:navmenu.separator /> --}}
 
             <flux:navmenu.item wire:click="delete({{ $type->id }})" icon="trash" class="text-red-600"
                 wire:confirm.prompt="Are you sure?\nType DELETE to confirm|DELETE">

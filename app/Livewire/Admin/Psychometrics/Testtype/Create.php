@@ -32,7 +32,7 @@ class Create extends Component
         ]);
 
         Toaster::success('Test type created successfully!');
-        $this->redirect(route('admin.psychometrics.index'), navigate: true);
+        $this->redirect(route('admin.psychometrics.types.index'), navigate: true);
     }
 
     public function render()

@@ -11,7 +11,7 @@
         </div>
 
         <!-- Create Button with modern styling -->
-        <flux:button variant="primary" icon="plus" size="sm" :href="route('admin.psychometrics.create')"
+        <flux:button variant="primary" icon="plus" size="sm" :href="route('admin.psychometrics.types.create')"
             class="transition-transform hover:scale-[1.02] active:scale-[0.98]">
             Create Test Type
         </flux:button>
