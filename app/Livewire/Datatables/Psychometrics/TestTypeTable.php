@@ -27,12 +27,41 @@ class TestTypeTable extends DataTableComponent
             ->setDefaultSort('created_at', 'desc')
             ->setPerPageAccepted([10, 25, 50, 100])
             ->setPerPage(10)
+            ->setDefaultPerPage(10)
             ->setTableWrapperAttributes([
                 'class' => 'rounded-lg shadow border border-gray-200 dark:border-gray-700'
             ])
             ->setOfflineIndicatorEnabled()
             ->setEmptyMessage('No test types found')
-            ->setBulkActionsEnabled();
+            ->setBulkActionsEnabled()
+            ->setHideBulkActionsWhenEmptyEnabled()
+            ->setRefreshKeepAlive()
+            ->setFilterLayout('slide-down')
+            ->setFilterPillsEnabled()
+            ->setTrAttributes(function ($row, $index) {
+                // Zebra striping with alternating row colors
+                $zebraClass = $index % 2 === 0
+                    ? 'bg-white dark:bg-gray-800'
+                    : 'bg-gray-50 dark:bg-gray-800/30';
+
+                // Status-specific classes
+                $statusClass = $row->is_active
+                    ? 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                    : 'opacity-80 hover:bg-gray-100 dark:hover:bg-gray-700/70';
+
+                return [
+                    'class' => $zebraClass . ' ' . $statusClass,
+                    'wire:key' => 'row-' . $row->id,
+                ];
+            })
+            ->setSearchFieldAttributes([
+                'class' => 'w-full pl-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition',
+                'placeholder' => 'Search tests...',
+            ])
+            ->setPerPageFieldAttributes([
+                'class' => 'block w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500',
+                'default' => 25
+            ]);
     }
 
     public function toggleStatus($id)

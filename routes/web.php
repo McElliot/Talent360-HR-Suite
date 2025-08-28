@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use App\Livewire\Admin;
+use App\Models\PsychometricTest;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,6 +35,21 @@ Route::middleware(['auth'])->group(function () {
                 ->name('tests.competencies.index');
         });
     });
+});
+
+// Temporary test route
+Route::get('/test-debug', function () {
+    $test = PsychometricTest::find(2);
+
+    // Get competences with pivot data
+    $competences = $test->competences()->withPivot('weight')->get();
+
+    dd([
+        'test_id' => $test->id,
+        'test_title' => $test->title,
+        'competences_count' => $competences->count(),
+        'competences' => $competences->toArray()
+    ]);
 });
 
 require __DIR__ . '/auth.php';

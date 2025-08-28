@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('psychometric_competences', function (Blueprint $table) {
             $table->id();
             $table->string('name'); // "Leadership", "Problem Solving"
-            $table->string('code')->unique(); // "LDR", "PS"
+            $table->string('code')->nullable(); // "LDR", "PS"
             $table->text('description')->nullable();
             $table->foreignId('test_type_id')->constrained('psychometric_test_types');
             $table->integer('sort_order')->default(0);

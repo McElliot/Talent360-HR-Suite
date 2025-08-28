@@ -25,15 +25,15 @@ class TestTable extends DataTableComponent
             ->setDefaultSort('created_at', 'desc')
             ->setPerPageAccepted([10, 25, 50, 100])
             ->setPerPage(10)
+            ->setDefaultPerPage(10)
             ->setTableWrapperAttributes([
                 'class' => 'rounded-lg shadow border border-gray-200 dark:border-gray-700'
             ])
             ->setOfflineIndicatorEnabled()
             ->setEmptyMessage('No tests found')
-            ->setSelectAllEnabled()
+            // ->setSelectAllEnabled()
             ->setBulkActionsEnabled()
             ->setHideBulkActionsWhenEmptyEnabled()
-            ->setDefaultPerPage(10)
             ->setFilterLayout('slide-down')
             ->setFilterPillsEnabled()
             ->setTrAttributes(function ($row, $index) {
@@ -59,7 +59,7 @@ class TestTable extends DataTableComponent
             ->setPerPageFieldAttributes([
                 'class' => 'block w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500',
                 'default' => 25
-            ]);;
+            ]);
     }
 
     public function columns(): array
