@@ -8,7 +8,7 @@
             </div>
             <div class="space-x-2">
                 <flux:button variant="danger" size="sm"
-                    :href="url()->back() ?? route('admin.psychometrics.tests.questions.index', $test->id)"
+                    :href="url()->previous() ?? route('admin.psychometrics.tests.questions.index', $test->id)"
                     class="shadow-sm hover:shadow-md transition-all">
                     Back
                 </flux:button>
