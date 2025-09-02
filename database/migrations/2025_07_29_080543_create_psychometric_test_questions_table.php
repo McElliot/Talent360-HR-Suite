@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('psychometric_test_questions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('psychometric_test_id')->constrained()->onDelete('cascade');
-            $table->text('parent_question')->nullable(); // For sub-questions
+            $table->text('parent_question')->nullable();
             $table->text('question_text');
-            $table->enum('question_type', [
+            $table->enum('answer_type', [
                 'multiple_choice', // Multiple select
                 'radio',           // Single select
                 'open_ended',      // Text input
@@ -31,15 +31,17 @@ return new class extends Migration
                 'text_area',       // Long text
             ])->default('radio');
             $table->unsignedSmallInteger('sort_order')->default(0);
-            $table->json('metadata')->nullable(); // For additional configuration
+            $table->string('question_number', 20);
+            $table->json('validation')->nullable();
             $table->boolean('is_required')->default(true);
             $table->boolean('is_active')->default(true);
             $table->softDeletes();
             $table->timestamps();
 
             $table->index('psychometric_test_id');
-            $table->index('question_type');
+            $table->index('answer_type');
             $table->index('sort_order');
+            $table->index('question_number');
         });
     }
 

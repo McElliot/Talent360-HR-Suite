@@ -20,7 +20,11 @@
 
             <flux:navmenu.separator />
             <flux:navmenu.item :href="route('admin.psychometrics.tests.competencies.index', $test->id)" icon="eye">
-                View Competences
+                Manage Competences
+            </flux:navmenu.item>
+
+            <flux:navmenu.item :href="route('admin.psychometrics.tests.questions.index', $test->id)" icon="list-bullet">
+                Manage Questions
             </flux:navmenu.item>
             <flux:navmenu.separator />
 

@@ -50,8 +50,8 @@ class PsychometricTest extends Model
         return $this->belongsToMany(
             PsychometricCompetence::class,
             'psychometric_competences_test',
-            'test_id',
-            'competency_id'
+            'test_id',       // This should match your migration
+            'competency_id'  // This should match your migration
         )->withPivot('weight', 'created_at', 'updated_at');
     }
 

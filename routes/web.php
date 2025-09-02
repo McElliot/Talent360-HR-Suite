@@ -33,6 +33,16 @@ Route::middleware(['auth'])->group(function () {
             // Test Competencies
             Route::get('/tests/{test}/competencies', Admin\Psychometrics\Competency\Index::class)
                 ->name('tests.competencies.index');
+
+            // Test Questions
+            Route::get('/tests/{test}/questions', Admin\Psychometrics\Question\Index::class)
+                ->name('tests.questions.index');
+
+            Route::get('/tests/{test}/questions/create', Admin\Psychometrics\Question\Create::class)
+                ->name('tests.questions.create');
+
+            Route::get('/tests/{test}/questions/{question}/edit', Admin\Psychometrics\Question\Edit::class)
+                ->name('tests.questions.edit');
         });
     });
 });

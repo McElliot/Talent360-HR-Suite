@@ -7,20 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class PsychometricTestQuestion extends Model
+class PsychometricTestQuestion extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'psychometric_test_id',
         'parent_question',
         'question_text',
-        'question_type',
+        'answer_type',
         'sort_order',
         'metadata',
         'is_required',
-        'is_active'
+        'is_active',
+        'question_number'
     ];
 
     protected $casts = [
@@ -54,7 +58,7 @@ class PsychometricTestQuestion extends Model
 
     public function options(): HasMany
     {
-        return $this->hasMany(PsychometricQuestionOption::class);
+        return $this->hasMany(PsychometricQuestionOption::class, 'question_id');
     }
 
     public function childQuestions(): HasMany
@@ -65,7 +69,12 @@ class PsychometricTestQuestion extends Model
 
     public function competencies()
     {
-        return $this->belongsToMany(PsychometricCompetence::class)
+        return $this->belongsToMany(
+            PsychometricCompetence::class,
+            'psychometric_competences_question',
+            'question_id',   // This should match your migration
+            'competency_id'  // This should match your migration
+        )
             ->withPivot('weight')
             ->withTimestamps();
     }
@@ -103,23 +112,23 @@ class PsychometricTestQuestion extends Model
 
     public function scopeOfType($query, $type)
     {
-        return $query->where('question_type', $type);
+        return $query->where('answer_type', $type);
     }
 
     // Helpers
     public function isMultipleChoice(): bool
     {
-        return $this->question_type === self::TYPE_MULTIPLE_CHOICE;
+        return $this->answer_type === self::TYPE_MULTIPLE_CHOICE;
     }
 
     public function isMatrixQuestion(): bool
     {
-        return $this->question_type === self::TYPE_MATRIX;
+        return $this->answer_type === self::TYPE_MATRIX;
     }
 
     public function hasOptions(): bool
     {
-        return in_array($this->question_type, [
+        return in_array($this->answer_type, [
             self::TYPE_MULTIPLE_CHOICE,
             self::TYPE_RADIO,
             self::TYPE_LIKERT_SCALE,

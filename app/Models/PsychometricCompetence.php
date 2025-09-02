@@ -37,14 +37,19 @@ class PsychometricCompetence extends Model
         return $this->belongsToMany(
             PsychometricTest::class,
             'psychometric_competences_test',
-            'competency_id',
-            'test_id'
+            'competency_id', // This should match your migration
+            'test_id'        // This should match your migration
         )->withPivot('weight');
     }
 
-    public function questions(): BelongsToMany
+    public function questions()
     {
-        return $this->belongsToMany(PsychometricTestQuestion::class)
+        return $this->belongsToMany(
+            PsychometricTestQuestion::class,
+            'psychometric_competences_question',
+            'competency_id', // This should match your migration
+            'question_id'    // This should match your migration
+        )
             ->withPivot('weight')
             ->withTimestamps();
     }

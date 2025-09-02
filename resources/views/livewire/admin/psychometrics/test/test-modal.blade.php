@@ -1,6 +1,5 @@
 <div>
-    <flux:modal name="test-modal" class="md:w-auto"
-        @closed="window.Livewire.dispatch('modal-closed', { modalName: 'test-modal' })">
+    <flux:modal name="test-modal" class="md:w-auto">
         <div class="space-y-6">
             <div>
                 <flux:heading size="lg">{{ $testId ? 'Edit' : 'Create New' }} Psychometric Test</flux:heading>

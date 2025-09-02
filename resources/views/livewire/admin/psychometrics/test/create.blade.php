@@ -56,21 +56,48 @@
                         placeholder="Provide test instructions for candidates" rows="4" />
                 </div>
 
-                <!-- Configuration Fields -->
+                <!-- Description -->
+                <div>
+                    <flux:textarea wire:model="description" label="Descriptions"
+                        placeholder="Provide test descriptions for candidates" rows="4" />
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <flux:input wire:model="duration_minutes" type="number" label="Duration (minutes)"
-                            placeholder="Leave empty for no time limit" min="1" />
+                    <!-- Timed Test Option -->
+                    <div class="flex items-center">
+                        <flux:checkbox wire:model="is_timed" id="is_timed" label="Timed Test (enforce time limits)" />
                     </div>
+
+                    <!-- Configuration Fields -->
+                    <div x-data="{ open: @entangle('is_timed') }" x-show="open" x-transition class="mt-3">
+                        <flux:input wire:model="duration" type="number" label="Duration (minutes)"
+                            placeholder="Enter duration in minutes" min="0" />
+                        @error('duration')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div>
                         <flux:input wire:model="max_attempts" type="number" label="Max Attempts"
                             placeholder="Leave empty for unlimited" min="1" />
                     </div>
-                </div>
 
-                <!-- Active Status -->
-                <div class="flex items-center">
-                    <flux:checkbox wire:model="is_active" id="is_active" label="Active (available for use)" />
+                    <!-- Version -->
+                    <div>
+                        <flux:input wire:model="version" type="number" label="Version" placeholder="1" min="1"
+                            step="1" />
+                    </div>
+
+                    <!-- Question Count -->
+                    <div>
+                        <flux:input wire:model="question_count" type="number" label="Question Count"
+                            placeholder="Leave empty if unknown" min="0" step="1" />
+                    </div>
+
+                    <!-- Active Status -->
+                    <div class="flex items-center">
+                        <flux:checkbox wire:model="is_active" id="is_active" label="Active (available for use)" />
+                    </div>
                 </div>
 
                 <!-- Form Actions -->

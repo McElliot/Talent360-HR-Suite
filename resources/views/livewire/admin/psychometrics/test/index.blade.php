@@ -11,18 +11,18 @@
         </div>
 
         <!-- Create Button -->
-        {{-- <flux:button variant="primary" icon="plus" size="sm" :href="route('admin.psychometrics.tests.create')"
+        <flux:button variant="primary" icon="plus" size="sm" :href="route('admin.psychometrics.tests.create')"
             class="transition-transform hover:scale-[1.02] active:scale-[0.98]">
             Create New Test
-        </flux:button> --}}
+        </flux:button>
 
-        <flux:modal.trigger name="test-modal">
+        {{-- <flux:modal.trigger name="test-modal">
             <flux:button variant="primary" color="indigo" icon="plus" size="sm"
                 class="transition-transform hover:scale-[1.02] active:scale-[0.98]"
                 wire:click="$dispatch('open-test-modal', { mode: 'create' })">
                 Create New Test
             </flux:button>
-        </flux:modal.trigger>
+        </flux:modal.trigger> --}}
     </div>
 
     <!-- Table Card -->
